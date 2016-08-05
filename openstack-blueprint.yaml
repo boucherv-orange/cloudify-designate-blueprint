@@ -95,4 +95,4 @@ node_templates:
 outputs:
   dns_endpoint:
     description: dns external endpoint
-    value: get_attribute: [designate_floatingip, floating_ip_address]
+    value: {get_attribute: [designate_floatingip, floating_ip_address]}
