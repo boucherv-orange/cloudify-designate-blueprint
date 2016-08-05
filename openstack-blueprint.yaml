@@ -91,8 +91,8 @@ node_templates:
     properties:
       floatingip:
         floating_network_name: { get_input: external_network_name }
+
 outputs:
-  http_endpoint:
-    description: Web server external endpoint
-    value: { concat: ['http://', { get_attribute: [virtual_ip, floating_ip_address] },
-                      ':', { get_property: [http_web_server, port] }] }
+  dns_endpoint:
+    description: dns external endpoint
+    value: get_attribute: [designate_floatingip, floating_ip_address]
