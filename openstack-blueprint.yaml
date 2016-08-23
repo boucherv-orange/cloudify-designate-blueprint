@@ -9,10 +9,10 @@ inputs:
   agent_user:
     description: User name used when SSH-ing into the started machine
 
-  image:
+  image_id:
     description: Openstack image name or id to use for the new server
 
-  flavor:
+  flavor_id:
     description: Openstack flavor name or id to use for the new server
 
   external_network_name:
@@ -26,8 +26,8 @@ node_templates:
     properties:
       cloudify_agent:
         user: { get_input: agent_user }
-      image: { get_input: image }
-      flavor: { get_input: flavor }
+      image: { get_input: image_id }
+      flavor: { get_input: flavor_id }
     relationships:
       - type: cloudify.openstack.server_connected_to_floating_ip
         target: designate_floatingip
@@ -95,4 +95,5 @@ node_templates:
 outputs:
   dns_endpoint:
     description: dns external endpoint
-    value: {get_attribute: [designate_floatingip, floating_ip_address]}
+    value: 
+      - { get_attribute: [designate_floatingip, floating_ip_address] }
